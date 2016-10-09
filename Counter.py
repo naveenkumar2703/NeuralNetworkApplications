@@ -8,11 +8,10 @@ Code that learns to count 3 digit binary number using neural networks
 import numpy as np
 from NeuralNetwork import *
 
+# 0.1 indicates 0 and 0.9 indicates 1. the values are transformed for efficient learning
 inputdata = np.array([np.array([0.1,0.1,0.1]),np.array([0.1,0.1,0.9]),np.array([0.1,0.9,0.1]),np.array([0.1,0.9,0.9]),np.array([0.9,0.1,0.1]),np.array([0.9,0.1,.9]),np.array([.9,.9,0.1]),np.array([.9,.9,.9])])
 outputdata = np.array([np.array([0.1,0.1,0.9]),np.array([0.1,0.9,0.1]),np.array([0.1,0.9,0.9]),np.array([0.9,0.1,0.1]),np.array([0.9,0.1,.9]),np.array([.9,.9,0.1]),np.array([.9,.9,.9]),np.array([0.1,0.1,0.1])])
 
-#inputdata = np.array([np.array([0,0,0]),np.array([0,0,1]),np.array([0,1,0]),np.array([0,1,1]),np.array([1,0,0]),np.array([1,0,1]),np.array([1,1,0]),np.array([1,1,1])])
-#outputdata = np.array([np.array([0,0,1]),np.array([0,1,0]),np.array([0,1,1]),np.array([1,0,0]),np.array([1,0,1]),np.array([1,1,0]),np.array([1,1,1]),np.array([0,0,0])])
 
 trainigdatas = []
 for ind in range(len(inputdata)):
