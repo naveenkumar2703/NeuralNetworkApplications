@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jul 19 21:29:43 2016
-This file trains a neural network to classify digits based on images and stores the trained network as pkl.
+This file trains a neural network to classify digits based on images and stores the weights of trained network as pkl.
 @author: naveenkumar2703
 """
 

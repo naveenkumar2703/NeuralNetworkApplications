@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Jul 30 00:00:44 2016
-
+Core file for neural networks which has functions to train and predict.
 @author: naveenkumar2703
 """
 import numpy as np
@@ -18,7 +18,8 @@ class NeuralNetwork(object):
                 
     def predict(self, inputvec):
         return self.feedforward(inputvec)[0]#appending 1 for bias and returning output at zero index
-        
+
+    # trains a neural network based on given training examples, learning rate and batch sizes.
     def train(self, training_examples, learningRate, momentum, training_iterations, batchsize):
         for index in range(training_iterations):
             layer_error_batch = deque()
