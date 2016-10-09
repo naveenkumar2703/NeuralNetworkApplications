@@ -1,3 +1,5 @@
+#This file solves a sudoku given as image using neural networks. Neural networks are pretrained using digit classifier.
+# Author - Naveen
 from PIL import Image
 from PIL import ImageOps
 import PIL
@@ -17,12 +19,14 @@ y_index = 0
 
 in_num = []
 sudoku = []
+# Initializing blank sudoku array
 for r_index in range(9):
     sudoku.append([])
     for c_index in range(9):
         sudoku[r_index].append('')
-print(pil_im.size)
+#print(pil_im.size)
 
+# Scanning the image image cell by cell on each row and column and extracting numbers from image using neural nets.
 for yaxis in range(9):
     for xaxis in range(9):
         dim = (x_index, y_index, x_index + x_inc, y_index + y_inc)
@@ -33,24 +37,20 @@ for yaxis in range(9):
         arr[:, 27] = 0
         arr[0, :] = 0
         arr[27, :] = 0
-        #if y_index == 44 and x_index == 0:
-        #    print(arr)
         n_ar = normalize(arr)
-        #n_ar = n_ar * 255# for writing
-        #n_ar = n_ar.astype(int) # for writing
         n_ar = n_ar.flatten()
 
         firstnet = pickle.load(open("first.pkl", "rb"))
-        predicted = firstnet.predict(n_ar)
-        print(np.argmax(predicted))
+        predicted = firstnet.predict(n_ar) # predicting a number using pre trained network
+        #print(np.argmax(predicted))
         in_num.append(np.argmax(predicted))
-        sudoku[yaxis][xaxis] = np.argmax(predicted)
+        sudoku[yaxis][xaxis] = np.argmax(predicted) # adding predicted number to sudoku for solving
         x_index += x_inc
     x_index = 0
     y_index += y_inc
 
 
-
+# provides numbers that are feasible foe a given cell
 def get_possible_numbers_for_cell(row, col, puzzle):
     possible_numbers = []
     #print(puzzle[row][col])
@@ -74,7 +74,7 @@ def get_possible_numbers_for_cell(row, col, puzzle):
                 possible_numbers.append(num)
     return possible_numbers
 
-
+# validates input puzzle
 def is_valid(puzzle):
 
     for index in range(9):
@@ -109,7 +109,7 @@ def is_valid(puzzle):
 
     return True
 
-
+# checks if a given puzzle is already solved
 def is_solved(puzzle):
     solved = True
 
@@ -124,6 +124,7 @@ def is_solved(puzzle):
 
     return solved
 
+# fills possible options for all cells
 def get_possible_options(puzzle):
     possiblity_arr = []
     for r_index in range(9):
@@ -137,7 +138,7 @@ def get_possible_options(puzzle):
 
     return possiblity_arr
 
-
+# validates each possible option and returns if feasible
 def feasible_option(updated_puzzle, options):
     feasible = True
     for r_index in range(9):
@@ -147,6 +148,7 @@ def feasible_option(updated_puzzle, options):
                 return feasible
     return feasible
 
+# solves a sudoku for given 9 * 9 array
 def solve(puzzle):
     if is_solved(puzzle):
         return puzzle
